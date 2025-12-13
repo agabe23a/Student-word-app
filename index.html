@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Notes Editor</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<body>
+<header>
+  <h2>📘 Student Word App</h2>  
+</header>
+
+<div class="app-container">
+  <!-- Sidebar for documents -->
+  <div class="sidebar">
+    <button id="newDocBtn">+ New Document</button>
+    <ul id="docList"></ul>
+  </div>
+   
+  <!-- Main editor -->
+  <div class="editor-area">
+  <div class="toolbar">
+  <button onclick="format('bold')"><b>B</b></button>
+  <button onclick="format('italic')"><i>I</i></button>
+  <button onclick="format('underline')"><u>U</u></button>
+  <button onclick="format('insertUnorderedList')">• List</button>
+  <button onclick="format('insertOrderedList')">1. List</button>
+  <button onclick="format('justifyLeft')">Left</button>
+  <button onclick="format('justifyCenter')">Center</button>
+  <button onclick="format('justifyRight')">Right</button>
+  <select onchange="format('formatBlock', this.value)">
+    <option value="">Heading</option>
+    <option value="H1">H1</option>
+    <option value="H2">H2</option>
+    <option value="P">Paragraph</option>
+  </select>
+  <button onclick="undo()">↺ Undo</button>
+  <button onclick="redo()">↻ Redo</button>
+  <button onclick="format('cut')">✂ Cut</button>
+  <button onclick="format('copy')">📋 Copy</button>
+  <button onclick="format('paste')">📥 Paste</button>
+  <button onclick="exportTXT()">Export TXT</button>
+  <button onclick="exportPDF()">Export PDF</button>
+  <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  <span id="wordCount">Words: 0 | Chars: 0</span>
+</div>    
+
+    <div id="editor" contenteditable="true" placeholder="Start typing your notes here..."></div>
+    <p class="status" id="status">Saved</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</body>
+</html>

@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+}
+
+header {
+  background: #1f2937;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.editor-container {
+  padding: 15px;
+}
+
+#editor {
+  background: white;
+  min-height: 70vh;
+  padding: 15px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.status {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.app-container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 180px;
+  background: #f1f5f9;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background: #1f2937;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 8px;
+  background: #fff;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.editor-area {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+  background: #e2e8f0;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+body.dark-mode {
+  background: #1e1e2f;
+  color: #ddd;
+}
+
+body.dark-mode header {
+  background: #111;
+}
+
+body.dark-mode .sidebar {
+  background: #2c2c3c;
+}
+
+body.dark-mode .sidebar li {
+  background: #333;
+  color: #ddd;
+}
+
+body.dark-mode .sidebar li.active {
+  background: #3b82f6;
+  color: white;
+}
+
+body.dark-mode #editor {
+  background: #2c2c3c;
+  color: #ddd;
+}
