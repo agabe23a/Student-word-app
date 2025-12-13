@@ -8,3 +8,12 @@
   "icons": []
 }
 
+{
+  "name": "Student Word App",
+  "short_name": "WordApp",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",  /* Allows auto rotate */
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

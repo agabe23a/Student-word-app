@@ -119,3 +119,43 @@ body.dark-mode #editor {
   background: #2c2c3c;
   color: #ddd;
 }
+
+/* Mobile-friendly and responsive layout */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Responsive text area or editor */
+#editor {
+    width: 100%;
+    height: calc(100vh - 150px);
+    box-sizing: border-box;
+}
+
+/* Toolbar wrapping for small screens */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Ensure buttons fit small screens */
+button {
+    flex: 1 1 auto;
+    min-width: 50px;
+}
+
+/* Rotate screen automatically with CSS orientation changes */
+@media (orientation: landscape) {
+    #editor {
+        height: calc(100vh - 100px);
+    }
+}
