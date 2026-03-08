@@ -1,61 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Notes Editor</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Notes Editor Pro</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="app">
 
-<body>
-<header>
-  <h2>📘 Student Word App</h2>  
-</header>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h2 class="logo">📘 Student Word App</h2>
+        <button id="newDocBtn" class="primary-btn">+ New Document</button>
 
-<div class="app-container">
-  <!-- Sidebar for documents -->
-  <div class="sidebar">
-    <button id="newDocBtn">+ New Document</button>
-    <ul id="docList"></ul>
+        <input
+          type="text"
+          id="searchDocs"
+          class="search-input"
+          placeholder="Search documents..."
+        />
+      </div>
+
+      <div class="doc-section">
+        <h3>Documents</h3>
+        <ul id="docList" class="doc-list"></ul>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button id="backupBtn" class="secondary-btn">Backup JSON</button>
+        <label class="secondary-btn file-label">
+          Restore JSON
+          <input type="file" id="restoreInput" accept=".json" hidden />
+        </label>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <span id="status" class="status-text">Saved</span>
+        </div>
+
+        <div class="topbar-right">
+          <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="sepia">Sepia</option>
+            <option value="midnight">Midnight</option>
+          </select>
+
+          <button onclick="exportTXT()" class="secondary-btn">Export TXT</button>
+          <button onclick="exportPDF()" class="secondary-btn">Export PDF</button>
+          <button onclick="exportHTML()" class="secondary-btn">Export HTML</button>
+
+          <label class="secondary-btn file-label">
+            Import TXT
+            <input type="file" id="importTxtInput" accept=".txt" hidden />
+          </label>
+        </div>
+      </header>
+
+      <!-- Editor Panel -->
+      <section class="editor-panel">
+
+        <!-- Document Title -->
+        <div class="doc-title-row">
+          <input
+            type="text"
+            id="docTitle"
+            class="doc-title-input"
+            placeholder="Untitled Document"
+          />
+
+          <div class="doc-actions">
+            <button id="favoriteBtn" class="icon-btn" title="Favorite">★</button>
+            <button id="renameBtn" class="icon-btn" title="Rename">Rename</button>
+            <button id="deleteBtn" class="danger-btn" title="Delete">Delete</button>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <button onclick="format('bold')" title="Bold"><b>B</b></button>
+          <button onclick="format('italic')" title="Italic"><i>I</i></button>
+          <button onclick="format('underline')" title="Underline"><u>U</u></button>
+
+          <button onclick="format('insertUnorderedList')" title="Bullet List">• List</button>
+          <button onclick="format('insertOrderedList')" title="Numbered List">1. List</button>
+
+          <button onclick="format('justifyLeft')" title="Align Left">Left</button>
+          <button onclick="format('justifyCenter')" title="Align Center">Center</button>
+          <button onclick="format('justifyRight')" title="Align Right">Right</button>
+
+          <button onclick="format('formatBlock', 'H1')" title="Heading 1">H1</button>
+          <button onclick="format('formatBlock', 'H2')" title="Heading 2">H2</button>
+          <button onclick="format('formatBlock', 'P')" title="Paragraph">P</button>
+
+          <input type="color" id="textColorPicker" title="Text Color" />
+          <input type="color" id="highlightColorPicker" title="Highlight Color" />
+
+          <button onclick="undo()" title="Undo">↺ Undo</button>
+          <button onclick="redo()" title="Redo">↻ Redo</button>
+          <button onclick="clearFormatting()" title="Clear Formatting">Clear</button>
+          <button onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+        </div>
+
+        <!-- Editable Area -->
+        <div
+          id="editor"
+          class="editor"
+          contenteditable="true"
+          spellcheck="true"
+          data-placeholder="Start typing your notes here..."
+        ></div>
+
+        <!-- Bottom Status -->
+        <div class="bottom-status">
+          <span id="wordCount">Words: 0 | Chars: 0</span>
+          <span id="extraStats">Paragraphs: 0 | Reading time: 0 min</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Panel -->
+    <aside class="right-panel">
+      <div class="info-card">
+        <h3>Document Info</h3>
+        <p><strong>Created:</strong> <span id="createdAt">--</span></p>
+        <p><strong>Last Updated:</strong> <span id="updatedAt">--</span></p>
+        <p><strong>Document ID:</strong> <span id="docId">--</span></p>
+      </div>
+
+      <div class="info-card">
+        <h3>Version History</h3>
+        <ul id="versionList" class="version-list"></ul>
+      </div>
+    </aside>
+
   </div>
-   
-  <!-- Main editor -->
-  <div class="editor-area">
-  <div class="toolbar">
-  <button onclick="format('bold')"><b>B</b></button>
-  <button onclick="format('italic')"><i>I</i></button>
-  <button onclick="format('underline')"><u>U</u></button>
-  <button onclick="format('insertUnorderedList')">• List</button>
-  <button onclick="format('insertOrderedList')">1. List</button>
-  <button onclick="format('justifyLeft')">Left</button>
-  <button onclick="format('justifyCenter')">Center</button>
-  <button onclick="format('justifyRight')">Right</button>
-  <select onchange="format('formatBlock', this.value)">
-    <option value="">Heading</option>
-    <option value="H1">H1</option>
-    <option value="H2">H2</option>
-    <option value="P">Paragraph</option>
-  </select>
-  <button onclick="undo()">↺ Undo</button>
-  <button onclick="redo()">↻ Redo</button>
-  <button onclick="format('cut')">✂ Cut</button>
-  <button onclick="format('copy')">📋 Copy</button>
-  <button onclick="format('paste')">📥 Paste</button>
-  <button onclick="exportTXT()">Export TXT</button>
-  <button onclick="exportPDF()">Export PDF</button>
-  <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  <span id="wordCount">Words: 0 | Chars: 0</span>
-</div>    
 
-    <div id="editor" contenteditable="true" placeholder="Start typing your notes here..."></div>
-    <p class="status" id="status">Saved</p>
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="app.js"></script>
-</body>
+  <!-- html2pdf library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
