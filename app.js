@@ -15,6 +15,12 @@ const updatedAtEl = document.getElementById("updatedAt");
 const docIdEl = document.getElementById("docId");
 const versionListEl = document.getElementById("versionList");
 
+const menuToggleBtn = document.getElementById("menuToggleBtn");
+const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const toast = document.getElementById("toast");
+const emptyDocsState = document.getElementById("emptyDocsState");
+
 const searchDocsInput = document.getElementById("searchDocs");
 const themeSelect = document.getElementById("themeSelect");
 
@@ -52,6 +58,17 @@ function saveDocs() {
 
 function setStatus(message) {
   statusText.textContent = message;
+}
+
+function showToast(message) {
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
 }
 
 function formatDate(dateString) {
