@@ -457,3 +457,273 @@ body.midnight{
     align-items:flex-start;
   }
 }
+
+.app-shell{
+  height:100vh;
+  overflow:hidden;
+}
+
+.mobile-header{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  background:linear-gradient(135deg, #4a6cf7, #6f8cff);
+  color:white;
+  box-shadow:0 6px 18px rgba(74, 108, 247, 0.18);
+}
+
+.app-title{
+  font-size:18px;
+  font-weight:700;
+}
+
+.menu-toggle-btn{
+  border:none;
+  background:rgba(255,255,255,0.18);
+  color:white;
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.mobile-status-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#9cffb0;
+}
+
+.brand-box{
+  background:linear-gradient(135deg, #eef3ff, #f8faff);
+  border:1px solid #dfe7ff;
+  border-radius:14px;
+  padding:14px;
+}
+
+.brand-subtitle{
+  margin-top:6px;
+  font-size:13px;
+  color:#5f6b7a;
+  line-height:1.5;
+}
+
+.section-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.section-badge{
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#edf2ff;
+  color:#3554d1;
+  font-weight:600;
+}
+
+.workspace-label{
+  display:block;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:#7c8798;
+  margin-bottom:3px;
+}
+
+.empty-docs-state{
+  text-align:center;
+  padding:22px 14px;
+  border:1px dashed #cfd8ea;
+  border-radius:14px;
+  background:#fbfcff;
+  margin-top:10px;
+}
+
+.empty-docs-state .empty-icon{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.empty-docs-state h4{
+  font-size:15px;
+  margin-bottom:6px;
+  color:#2d3748;
+}
+
+.empty-docs-state p{
+  font-size:13px;
+  color:#6b7280;
+  line-height:1.5;
+}
+
+.sidebar-overlay{
+  display:none;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#111827;
+  color:white;
+  padding:12px 16px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  font-size:14px;
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:all 0.25s ease;
+  z-index:3000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.topbar{
+  box-shadow:0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+.editor-panel{
+  background:#f7f9fc;
+}
+
+.editor,
+.toolbar,
+.info-card,
+.sidebar,
+.topbar{
+  box-shadow:0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.doc-list li{
+  border:1px solid transparent;
+}
+
+.doc-list li.active{
+  border-color:#c9d6ff;
+}
+
+body.dark .brand-box,
+body.midnight .brand-box{
+  background:#1f2937;
+  border-color:#374151;
+}
+
+body.dark .brand-subtitle,
+body.midnight .brand-subtitle{
+  color:#cbd5e1;
+}
+
+body.dark .section-badge,
+body.midnight .section-badge{
+  background:#334155;
+  color:#e2e8f0;
+}
+
+body.dark .empty-docs-state,
+body.midnight .empty-docs-state{
+  background:#1f2937;
+  border-color:#475569;
+}
+
+body.dark .empty-docs-state h4,
+body.midnight .empty-docs-state h4{
+  color:#f1f5f9;
+}
+
+body.dark .empty-docs-state p,
+body.midnight .empty-docs-state p{
+  color:#cbd5e1;
+}
+
+body.sepia .brand-box{
+  background:#f3e8d3;
+  border-color:#d7c29b;
+}
+
+body.sepia .brand-subtitle{
+  color:#7b624e;
+}
+
+body.sepia .section-badge{
+  background:#e8d9b7;
+  color:#6f533d;
+}
+
+body.sepia .empty-docs-state{
+  background:#fbf3e4;
+  border-color:#d7c29b;
+}
+
+@media(max-width:700px){
+  .mobile-header{
+    display:flex;
+  }
+
+  .app{
+    grid-template-columns:1fr;
+    height:calc(100vh - 70px);
+  }
+
+  .sidebar{
+    position:fixed;
+    top:70px;
+    left:-100%;
+    width:290px;
+    height:calc(100vh - 70px);
+    z-index:2000;
+    transition:left 0.25s ease;
+    box-shadow:8px 0 30px rgba(0,0,0,0.12);
+  }
+
+  .sidebar.open{
+    left:0;
+  }
+
+  .sidebar-overlay.show{
+    display:block;
+    position:fixed;
+    top:70px;
+    left:0;
+    width:100%;
+    height:calc(100vh - 70px);
+    background:rgba(15, 23, 42, 0.35);
+    z-index:1500;
+  }
+
+  .topbar{
+    padding:12px;
+  }
+
+  .topbar-right{
+    width:100%;
+  }
+
+  .toolbar{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    white-space:nowrap;
+  }
+
+  .toolbar button{
+    flex:0 0 auto;
+  }
+
+  .editor-panel{
+    padding:12px;
+  }
+}
