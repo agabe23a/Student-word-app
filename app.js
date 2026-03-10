@@ -104,9 +104,11 @@ function renderDocs(filter = "") {
     .sort((a, b) => {
       if (a.favorite && !b.favorite) return -1;
       if (!a.favorite && b.favorite) return 1;
+      if (emptyDocsState) emptyDocsState.style.display = "block";
       return new Date(b.updatedAt) - new Date(a.updatedAt);
     });
 
+  if (emptyDocsState) emptyDocsState.style.display = "none";
   if (filteredDocs.length === 0) {
     const li = document.createElement("li");
     li.textContent = "No documents found";
@@ -163,6 +165,7 @@ function newDoc() {
   renderDocs(searchDocsInput.value.trim());
   loadDoc(newDocument.id);
   setStatus("New document created");
+  showToast("New document created");
 }
 
 // =========================
@@ -184,11 +187,14 @@ function deleteCurrentDoc() {
   } else {
     currentDocId = docs[0].id;
   }
+  sidebar?.classList.remove("open");
+sidebarOverlay?.classList.remove("show");
 
   saveDocs();
   renderDocs(searchDocsInput.value.trim());
   loadDoc(currentDocId);
   setStatus("Document deleted");
+  showToast("Document deleted");
 }
 
 // =========================
@@ -209,6 +215,7 @@ function renameCurrentDoc() {
   renderDocs(searchDocsInput.value.trim());
   updateMeta();
   setStatus("Document renamed");
+  showToast("Document renamed");
 }
 
 // =========================
@@ -226,6 +233,7 @@ function toggleFavorite() {
   updateMeta();
   favoriteBtn.textContent = doc.favorite ? "★ Favorite" : "☆ Favorite";
   setStatus(doc.favorite ? "Marked as favorite" : "Removed from favorites");
+  showToast(doc.favorite ? "Added to favorites" : "Removed from favorites");
 }
 
 // =========================
@@ -317,6 +325,7 @@ function saveCurrentDoc() {
   renderVersionHistory();
   updateWordCount();
   setStatus("Saved");
+  showToast("All changes saved");
 }
 
 editor.addEventListener("input", () => {
@@ -588,6 +597,16 @@ newDocBtn?.addEventListener("click", newDoc);
 deleteBtn?.addEventListener("click", deleteCurrentDoc);
 renameBtn?.addEventListener("click", renameCurrentDoc);
 favoriteBtn?.addEventListener("click", toggleFavorite);
+
+menuToggleBtn?.addEventListener("click", () => {
+  sidebar?.classList.toggle("open");
+  sidebarOverlay?.classList.toggle("show");
+});
+
+sidebarOverlay?.addEventListener("click", () => {
+  sidebar?.classList.remove("open");
+  sidebarOverlay?.classList.remove("show");
+});
 
 // =========================
 // LOAD APP
